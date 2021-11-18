@@ -51,8 +51,8 @@ describe DockingStation do
         expect { station.release_bike }.to raise_error "Bike is broken, cannot release it"
       end  
     end
+  end 
   
-
   context "Docking Station Capacity" do
     it "Allows user to set capacity of dockingstation" do
       station = DockingStation.new(30)
