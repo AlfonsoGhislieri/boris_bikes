@@ -63,6 +63,21 @@ describe DockingStation do
       expect(station.capacity).to eq DockingStation::DEFAULT_CAPACITY 
     end
   end
+
+  context "Handling Broken Bikes" do
+    it "allows user to move broken bikes to van" do
+      expect(subject).to respond_to :to_van
+    end 
+    it "it removes broken bikes to van holding" do
+      station = DockingStation.new
+      bike = Bike.new
+      bike.report
+      station.dock(bike)
+      station.to_van
+      expect(station.tempholding.include?(bike)).to eq true
+    end
+     
+  end
 end
 
 
