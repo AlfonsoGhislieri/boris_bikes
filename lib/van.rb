@@ -13,4 +13,8 @@ class Van
     end
     station.remove_broken_bikes
   end
+
+  def empty_van
+    @holding = []
+  end
 end
