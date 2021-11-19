@@ -1,7 +1,6 @@
 require_relative 'bike'
 require_relative 'van'
 
-
 class DockingStation
   DEFAULT_CAPACITY = 20
   attr_reader :bikes, :capacity, :tempholding
@@ -9,7 +8,6 @@ class DockingStation
   def initialize(capacity = DEFAULT_CAPACITY)
     @bikes = []
     @capacity = capacity
-    @tempholding = []
   end
   
   def release_bike
@@ -23,13 +21,8 @@ class DockingStation
     @bikes << bike
   end
 
-  def to_van
-    @bikes.each_with_index do | bike, index | 
-      if !bike.working? 
-        @tempholding << @bikes[index]
-        @bikes.delete_at(index)
-      end
-    end
+  def remove_broken_bikes
+    @bikes.select! { | bike| bike.working? }
   end
 
   private 

@@ -64,20 +64,16 @@ describe DockingStation do
     end
   end
 
-  context "Handling Broken Bikes" do
-    it "allows user to move broken bikes to van" do
-      expect(subject).to respond_to :to_van
-    end 
-    it "it removes broken bikes to van holding" do
-      station = DockingStation.new
-      bike = Bike.new
-      bike.report
-      station.dock(bike)
-      station.to_van
-      expect(station.tempholding.include?(bike)).to eq true
-    end
-     
+  it "removes brokens bikes when van takes them" do
+    station = DockingStation.new
+    bike = Bike.new
+    van = Van.new
+    bike.report
+    station.dock(bike)
+    van.send_broken_to_van(station)
+    expect(station.bikes.include?(bike)).to eq false
   end
+
 end
 
 
